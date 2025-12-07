@@ -152,6 +152,11 @@ def select_shallow_thinking_agent(provider) -> str:
         "ollama": [
             ("llama3.1 local", "llama3.1"),
             ("llama3.2 local", "llama3.2"),
+        ],
+        "qwen (千问)": [
+            ("Qwen-Turbo - Fast and efficient model for quick tasks", "qwen-turbo-latest"),
+            ("Qwen-Plus - Balanced performance and capability", "qwen-plus-latest"),
+            ("Qwen-Max - Most capable Qwen model", "qwen3-max"),
         ]
     }
 
@@ -214,6 +219,11 @@ def select_deep_thinking_agent(provider) -> str:
         "ollama": [
             ("llama3.1 local", "llama3.1"),
             ("qwen3", "qwen3"),
+        ],
+        "qwen (千问)": [
+            ("Qwen-flash - Balanced performance and capability", "qwen-flash"),
+            ("Qwen-plus - Most capable Qwen model", "qwen-plus-latest"),
+            ("Qwen-max - Extended context window for complex analysis", "qwen3-max"),
         ]
     }
     
@@ -246,6 +256,7 @@ def select_llm_provider() -> tuple[str, str]:
         ("OpenAI", "https://api.openai.com/v1"),
         ("Anthropic", "https://api.anthropic.com/"),
         ("Google", "https://generativelanguage.googleapis.com/v1"),
+        ("Qwen (千问)", "https://dashscope.aliyuncs.com/compatible-mode/v1"),
         ("Openrouter", "https://openrouter.ai/api/v1"),
         ("Ollama", "http://localhost:11434/v1"),        
     ]

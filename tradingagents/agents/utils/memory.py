@@ -1,15 +1,28 @@
 import chromadb
 from chromadb.config import Settings
 from openai import OpenAI
+import os
 
 
 class FinancialSituationMemory:
     def __init__(self, name, config):
-        if config["backend_url"] == "http://localhost:11434/v1":
+        
+        # Determine embedding model and API key based on provider
+        provider = config.get("llm_provider", "openai").lower()
+        
+        if provider == "qwen (千问)":
+            self.embedding = "text-embedding-v4"
+            api_key = os.getenv("DASHSCOPE_API_KEY")
+            if not api_key:
+                raise ValueError("DASHSCOPE_API_KEY environment variable is required for Qwen provider")
+            self.client = OpenAI(base_url=config["backend_url"], api_key=api_key)
+        elif config["backend_url"] == "http://localhost:11434/v1":
             self.embedding = "nomic-embed-text"
+            self.client = OpenAI(base_url=config["backend_url"])
         else:
             self.embedding = "text-embedding-3-small"
-        self.client = OpenAI(base_url=config["backend_url"])
+            self.client = OpenAI(base_url=config["backend_url"])
+            
         self.chroma_client = chromadb.Client(Settings(allow_reset=True))
         self.situation_collection = self.chroma_client.create_collection(name=name)
 
