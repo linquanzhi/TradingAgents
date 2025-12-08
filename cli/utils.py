@@ -122,6 +122,38 @@ def select_research_depth() -> int:
     return choice
 
 
+def select_language() -> str:
+    """Select output language using an interactive selection."""
+
+    # Define language options
+    LANGUAGE_OPTIONS = [
+        ("English - All reports and analysis in English", "en"),
+        ("中文 - 所有报告和分析使用中文", "zh"),
+    ]
+
+    choice = questionary.select(
+        "Select Your [Output Language]:",
+        choices=[
+            questionary.Choice(display, value=value) for display, value in LANGUAGE_OPTIONS
+        ],
+        instruction="\n- Use arrow keys to navigate\n- Press Enter to select",
+        style=questionary.Style(
+            [
+                ("selected", "fg:cyan noinherit"),
+                ("highlighted", "fg:cyan noinherit"),
+                ("pointer", "fg:cyan noinherit"),
+            ]
+        ),
+    ).ask()
+
+    if choice is None:
+        console.print("\n[red]No language selected. Exiting...[/red]")
+        exit(1)
+
+    return choice
+
+
+
 def select_shallow_thinking_agent(provider) -> str:
     """Select shallow thinking llm engine using an interactive selection."""
 
