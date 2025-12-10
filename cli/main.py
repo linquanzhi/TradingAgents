@@ -466,15 +466,7 @@ def get_user_selections():
         )
     )
     selected_research_depth = select_research_depth()
-
-    # Step 5: Output Language
-    console.print(
-        create_question_box(
-            "Step 5: Output Language", "Select the language for all reports and analysis"
-        )
-    )
-    selected_language = select_language()
-
+    
     # Step 6: LLM Provider
     console.print(
         create_question_box(
@@ -497,7 +489,6 @@ def get_user_selections():
         "analysis_date": analysis_date,
         "analysts": selected_analysts,
         "research_depth": selected_research_depth,
-        "language": selected_language,
         "llm_provider": selected_llm_provider.lower(),
         "backend_url": backend_url,
         "shallow_thinker": selected_shallow_thinker,
@@ -756,7 +747,6 @@ def run_analysis():
     config["deep_think_llm"] = selections["deep_thinker"]
     config["backend_url"] = selections["backend_url"]
     config["llm_provider"] = selections["llm_provider"].lower()
-    config["language"] = selections["language"]
 
     # Initialize the graph
     graph = TradingAgentsGraph(
