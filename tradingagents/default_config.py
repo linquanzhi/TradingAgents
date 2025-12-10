@@ -14,7 +14,7 @@ DEFAULT_CONFIG = {
     "quick_think_llm": "gpt-4o-mini",
     "backend_url": "https://api.openai.com/v1",
     # Language settings
-    "language": "en",  # Options: "en" (English), "zh" (Chinese)
+    "language": "zh",  # Options: "en" (English), "zh" (Chinese)
     # Debate and discussion settings
     "max_debate_rounds": 1,
     "max_risk_discuss_rounds": 1,
